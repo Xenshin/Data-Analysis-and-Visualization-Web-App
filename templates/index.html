@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analysis and Visualization</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Data Analysis and Visualization</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".csv" required>
+            <button type="submit">Upload</button>
+        </form>
+        {% if filename %}
+            <p>Data uploaded successfully from file: {{ filename }}</p>
+            <div id="chart-container">
+                <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
+            <button onclick="toggleChart()">Averages</button>
+        {% endif %}
+        <div id="loader">Loading...</div>
+        <script src="{{ url_for('static', filename='chart_builder.js') }}"></script>
+    </div>
+</body>
+</html>
